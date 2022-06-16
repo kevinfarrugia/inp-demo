@@ -1,21 +1,21 @@
 import { onINP } from "https://unpkg.com/web-vitals@3.0.0-beta.2/dist/web-vitals.js?module";
 
-const FRAME = 16; // Millseconds per frame at 60hz
+function trackInteractions(callback) {
+  const observer = new PerformanceObserver((list) => {
+    for (let entry of list.getEntries()) {
+      if (!entry.interactionId) continue;
 
-function $(selector) {
-  return document.querySelector(selector);
+      callback(entry);
+    }
+  });
+
+  observer.observe({
+    type: "event",
+    durationThreshold: 16, // minumum by spec
+    buffered: true,
+  });
 }
 
-function $$(selector) {
-  return [...document.querySelectorAll(selector)];
-}
-
-let lastClockTime = performance.now();
-function time() {
-  return performance.now() - lastClockTime;
-}
-
-let isClockEnabled = true;
 let startTime = performance.now();
 let lastFrameTime = startTime;
 
@@ -44,9 +44,19 @@ function initialize() {
   periodicBlock();
 
   // Log INP any time its value changes.
-  onINP(console.log, {
-    reportAllChanges: true,
-    durationThreshold: 0,
+  onINP(
+    (entry) => {
+      console.log(entry);
+    },
+    {
+      reportAllChanges: true,
+      durationThreshold: 0,
+    }
+  );
+
+  trackInteractions((entry) => {
+    const row = `<tr><td>${entry.duration}</td><td>${entry.name}</td></tr>`;
+    document.getElementById("logs").insertAdjacentHTML("beforeend", row);
   });
 }
 

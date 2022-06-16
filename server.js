@@ -1,5 +1,18 @@
+import { readFileSync } from "fs";
 import { createServer } from "http";
-import fs from "fs";
+import path from "path";
+
+import index from "./templates/index.js";
+import client from "./templates/client.js";
+import submit from "./templates/submit.js";
+
+const handler = (req, res) => {
+  const file = path.join(process.cwd(), req.url.substring(1));
+  const stringified = readFileSync(file, "utf8");
+
+  res.setHeader("Content-Type", "application/javascript");
+  return res.end(stringified);
+};
 
 // imitates a CPU intenstive operation
 const doSomething = (baseNumber) => {
@@ -32,43 +45,27 @@ const server = createServer((request, response) => {
     return;
   }
 
-  if (request.url.match(/\.js$/)) {
-    const file = fs.readFileSync(request.url.substring(1), "utf8");
-
-    if (file) {
-      response.writeHead(200, { "Content-Type": "application/javascript" });
-      response.end(file);
-    }
+  if (request.url.match(/^\/public/)) {
+    return handler(request, response);
   }
 
   const { pathname } = new URL(request.url, `http://${request.headers.host}`);
 
   switch (pathname.replace(/(.+)\/$/, "$1")) {
     case "/submit": {
-      doSomething(100);
+      doSomething(80);
       response.writeHead(200);
-
-      const html = fs.readFileSync("./submit.html");
-      response.end(html);
-
+      response.end(submit);
       break;
     }
     case "/client": {
-      doSomething(10);
       response.writeHead(200);
-
-      const html = fs.readFileSync("./client.html");
-      response.end(html);
-
+      response.end(client);
       break;
     }
     case "/": {
-      doSomething(10);
       response.writeHead(200);
-
-      const html = fs.readFileSync("./index.html");
-      response.end(html);
-
+      response.end(index);
       break;
     }
     default: {

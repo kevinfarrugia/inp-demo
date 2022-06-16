@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+const html = `<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>FID Demo</title>
+    <title>INP Demo</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
   </head>
   <body>
@@ -11,6 +11,7 @@
       <h1>Form Submitted</h1>
       <a href="/">Go Back</a>
     </div>
-    <script type="module" src="main.js"></script>
   </body>
-</html>
+</html>`;
+
+export default html;
