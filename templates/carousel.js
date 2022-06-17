@@ -8,7 +8,8 @@ const html = `<!DOCTYPE html>
   </head>
   <body>
     <div>
-      <h1>Carousel Example</h1>
+      <h1>Gallery Example</h1>
+      <p>Click on a thumbnail. INP is logged to console.</p>
       <div style="border:1px solid;width:400px">
         <img id="poster" style="width:100%" src="https://picsum.photos/200/300/?random" />
         <ul style="list-style:none;padding:0;display:grid;grid-template-columns:auto auto auto;gap:1em">
@@ -23,6 +24,7 @@ const html = `<!DOCTYPE html>
           </li>
         </ul>
       </div>
+      <h2>Logs</h2>
       <table>
         <thead>
           <tr>
@@ -35,8 +37,13 @@ const html = `<!DOCTYPE html>
     </div>
     <script type="module" src="./public/main.js"></script>
     <script type="module">
-      import { periodicBlock } from "./public/main.js";
+      import { periodicBlock, trackInteractions } from "./public/main.js";
       periodicBlock(2000);
+
+      trackInteractions((entry) => {
+        const row = "<tr><td>" + entry.duration + "</td><td>" + entry.name + "</td></tr>";
+        document.getElementById("logs").insertAdjacentHTML("beforeend", row);
+      });
     </script>
     <script>
       const click = async (src) => {

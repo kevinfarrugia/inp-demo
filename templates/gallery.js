@@ -8,7 +8,8 @@ const html = `<!DOCTYPE html>
   </head>
   <body>
     <div>
-      <h1>Cleaner Gallery Example</h1>
+      <h1>Gallery Example</h1>
+      <p>Click on a thumbnail. INP is logged to console.</p>
       <div style="border:1px solid;width:400px">
         <img id="poster" style="width:100%" src="https://picsum.photos/200/300/?random" />
         <ul style="list-style:none;padding:0;display:grid;grid-template-columns:auto auto auto;gap:1em">

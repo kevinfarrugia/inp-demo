@@ -1,6 +1,6 @@
 import { onINP } from "https://unpkg.com/web-vitals@3.0.0-beta.2/dist/web-vitals.js?module";
 
-function trackInteractions(callback) {
+export function trackInteractions(callback) {
   const observer = new PerformanceObserver((list) => {
     for (let entry of list.getEntries()) {
       if (!entry.interactionId) continue;
@@ -51,11 +51,6 @@ function initialize() {
       durationThreshold: 0,
     }
   );
-
-  trackInteractions((entry) => {
-    const row = `<tr><td>${entry.duration}</td><td>${entry.name}</td></tr>`;
-    document.getElementById("logs").insertAdjacentHTML("beforeend", row);
-  });
 }
 
 if (
