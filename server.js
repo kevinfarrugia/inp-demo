@@ -4,6 +4,7 @@ import path from "path";
 
 import index from "./templates/index.js";
 import client from "./templates/client.js";
+import carousel from "./templates/carousel.js";
 import submit from "./templates/submit.js";
 
 const handler = (req, res) => {
@@ -56,6 +57,11 @@ const server = createServer((request, response) => {
       doSomething(80);
       response.writeHead(200);
       response.end(submit);
+      break;
+    }
+    case "/carousel": {
+      response.writeHead(200);
+      response.end(carousel);
       break;
     }
     case "/client": {

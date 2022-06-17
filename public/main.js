@@ -27,7 +27,7 @@ function block(blockingTime = 0) {
 }
 
 function periodicBlock() {
-  const amount = 3000;
+  const amount = 1000;
 
   block(Math.random() * amount);
 
