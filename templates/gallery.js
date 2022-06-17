@@ -8,7 +8,7 @@ const html = `<!DOCTYPE html>
   </head>
   <body>
     <div>
-      <h1>Carousel Example</h1>
+      <h1>Cleaner Gallery Example</h1>
       <div style="border:1px solid;width:400px">
         <img id="poster" style="width:100%" src="https://picsum.photos/200/300/?random" />
         <ul style="list-style:none;padding:0;display:grid;grid-template-columns:auto auto auto;gap:1em">
@@ -23,21 +23,8 @@ const html = `<!DOCTYPE html>
           </li>
         </ul>
       </div>
-      <table>
-        <thead>
-          <tr>
-            <th>Value</th>
-            <th>Type</th>
-          </tr>
-        </thead>
-        <tbody id="logs"></tbody>
-      </table>
     </div>
     <script type="module" src="./public/main.js"></script>
-    <script type="module">
-      import { periodicBlock } from "./public/main.js";
-      periodicBlock(2000);
-    </script>
     <script>
       const click = async (src) => {
         const res = await fetch("/submit");

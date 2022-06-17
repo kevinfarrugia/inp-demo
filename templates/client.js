@@ -12,7 +12,7 @@ const html = `<!DOCTYPE html>
       <p>Input your username and submit the form. INP is logged to console.</p>
       <form id="form" action="/submit">
         <input id="input" type="text" placeholder="Username" />
-        <button type="submit">Submit</button>
+        <button style="background-color:#000;color:#fff;border:0;padding:0.5em" type="submit">Submit</button>
         <div id="output"></div>
         <h2>Logs</h2>
         <table>

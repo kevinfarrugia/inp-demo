@@ -26,12 +26,12 @@ function block(blockingTime = 0) {
   }
 }
 
-function periodicBlock() {
-  const amount = 2000;
+export function periodicBlock(value) {
+  const amount = value;
 
   block(Math.random() * amount);
 
-  setTimeout(periodicBlock, Math.random() * 1000);
+  setTimeout(() => periodicBlock(value), Math.random() * 1000);
 }
 
 function initialize() {
@@ -40,8 +40,6 @@ function initialize() {
       lastFrameTime = performance.now();
     }
   });
-
-  periodicBlock();
 
   // Log INP any time its value changes.
   onINP(

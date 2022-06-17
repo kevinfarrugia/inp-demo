@@ -27,6 +27,10 @@ const html = `<!DOCTYPE html>
       </form>
     </div>
     <script type="module" src="./public/main.js"></script>
+    <script type="module">
+      import { periodicBlock } from "./public/main.js";
+      periodicBlock(2000);
+    </script>
   </body>
 </html>`;
 
